@@ -1,29 +1,54 @@
-return (
-  <div className="h-screen w-screen flex items-center justify-center bg-black p-4">
-    {/* Phone frame - HARDCODED Figma styles */}
+import { Screen } from '@/app/App';
+
+interface WelcomeScreenProps {
+  navigate: (screen: Screen) => void;
+}
+
+export default function WelcomeScreen({ navigate }: WelcomeScreenProps) {
+  return (
     <div 
-      className="relative w-[390px] h-[844px] overflow-hidden rounded-[48px] shadow-2xl"
+      className="h-full flex flex-col items-center justify-between px-6 pt-20 pb-12"
       style={{
-        background: '#ffffff', // Figma white background
-        color: '#0f0f0f',      // Figma foreground black
-        border: '8px solid rgba(0,0,0,0.2)', // Figma bezel
+        background: 'linear-gradient(180deg, #ffffff 0%, #eff6ff 100%)'
       }}
     >
-      {/* Notch */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[160px] h-[32px] bg-black rounded-b-[24px] z-50" />
-      
-      {/* Screen content */}
-      <div className="h-full pt-12 pb-12 overflow-y-auto">
-        {renderScreen()}
+      {/* Logo */}
+      <div className="flex-1 flex flex-col items-center justify-center">
+        <div 
+          className="w-24 h-24 rounded-3xl flex items-center justify-center mb-6 shadow-lg"
+          style={{
+            background: 'linear-gradient(135deg, #06b6d4 0%, #8b5cf6 100%)'
+          }}
+        >
+          <span className="text-white font-bold text-6xl">W</span>
+        </div>
+        
+        <h1 
+          className="text-4xl font-bold mb-3 text-center"
+          style={{ color: '#0f0f0f' }}
+        >
+          Way‑To‑Do
+        </h1>
+        
+        <p 
+          className="text-2xl font-semibold mb-8 text-center leading-tight"
+          style={{ color: '#0f0f0f' }}
+        >
+          Create. Collaborate. Execute.
+        </p>
+
+        {/* CTA */}
+        <button
+          onClick={() => navigate('signin')}
+          className="w-full py-4 rounded-2xl font-semibold text-base shadow-lg active:scale-98 transition-transform"
+          style={{
+            backgroundColor: '#2563eb',
+            color: 'white'
+          }}
+        >
+          Get Started
+        </button>
       </div>
-      
-      {showTabBar && <BottomTabBar activeTab={state.activeTab} setTab={setTab} />}
-      {state.showTooltip && (
-        <DemoTooltip
-          message={state.showTooltip}
-          onClose={() => updateState({ showTooltip: null })}
-        />
-      )}
     </div>
-  </div>
-);
+  );
+}
